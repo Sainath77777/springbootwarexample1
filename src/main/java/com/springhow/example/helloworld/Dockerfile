@@ -14,14 +14,8 @@ COPY src ./src
 # Package the application
 RUN mvn clean package 
  
-# Stage 2: Run the application
-FROM openjdk:17-jdk-alpine
- 
-# Set the working directory
-WORKDIR /app
- 
 # Copy the packaged JAR from the build stage
-COPY --from=build /app/target/*.jar app.jar
+COPY  /app/target/*.jar app.jar
  
 # Expose the application port (change if needed)
 EXPOSE 8080
