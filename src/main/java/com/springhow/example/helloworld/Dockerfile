@@ -1,11 +1,30 @@
-# Base image
-FROM openjdk:11-jre-slim
+# Stage 1: Build the application
+FROM maven:3.8.6-openjdk-17 AS build
  
 # Set the working directory inside the container
 WORKDIR /app
  
-# Copy the built JAR file into the container
-COPY target/your-app.jar /app/your-app.jar
+# Copy the pom.xml and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
  
-# Command to run the application
-ENTRYPOINT ["java", "-jar", "your-app.jar"]
+# Copy the rest of the application source code
+COPY src ./src
+ 
+# Package the application
+RUN mvn clean package 
+ 
+# Stage 2: Run the application
+FROM openjdk:17-jdk-alpine
+ 
+# Set the working directory
+WORKDIR /app
+ 
+# Copy the packaged JAR from the build stage
+COPY --from=build /app/target/*.jar app.jar
+ 
+# Expose the application port (change if needed)
+EXPOSE 8080
+ 
+# Define the entry point
+ENTRYPOINT ["java", "-jar", "app.jar"]
