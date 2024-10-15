@@ -95,4 +95,4 @@ jobs:
     - name: Upload artifact to JFrog
       run: |
         curl -u ${{ secrets.JFROG_USERNAME }}:${{ secrets.JFROG_TOKEN }} \
-          -T target/<your_artifact>.jar "http://<jfrog_url>/artifactory/<repo>/<your_artifact>.jar"
+          -T target/app.jar "https://kandulasainath.jfrog.io//artifactory/springbootwarexample1/app.jar"
