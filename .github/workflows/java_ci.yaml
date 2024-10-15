@@ -75,7 +75,7 @@ jobs:
  
     # Step 4: Push Docker Image to DockerHub
     - name: Push Docker image to DockerHub
-      run: docker push <your_dockerhub_username>/<your_docker_image>:latest
+      run: docker push sainath2127/javaapp:latest
  
   nexus-push:
     runs-on: ubuntu-latest
