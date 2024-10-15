@@ -52,7 +52,7 @@ jobs:
  
     # Step 3: Run SonarQube scan
     - name: SonarQube Scan
-      run: mvn sonar:sonar -Dsonar.projectKey= -Dsonar.host.url=<your_sonar_url> -Dsonar.login=<your_sonar_token>
+      run: mvn sonar:sonar -Dsonar.projectKey=Sainath77777_springbootwarexample1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login= 1d9ca335a8e83a2acbe7acc174eebcbf70107e16
  
   docker-build:
     runs-on: ubuntu-latest
