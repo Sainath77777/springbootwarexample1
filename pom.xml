@@ -20,6 +20,8 @@
   </parent>
 
   <properties>
+    <sonar.projectKey>Sainath77777_springbootwarexample1</sonar.projectKey>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -39,12 +41,65 @@
 
   <build>
     <plugins>
+      <!-- Unit Testing with Surefire -->
+      <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <includes>
+                       <include> **/*Test.java</include>
+                    </includes>
+                </configuration>  
+      </plugin>
+      <!-- Functional Testing with Failsafe -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                     <include> **/*FunctionalTest.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+        <!-- Default Profile for Unit Tests -->
+        <profile>
+            <id>unit-tests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <skipFunctionalTests>true</skipFunctionalTests>
+                <skipPerformanceTests>true</skipPerformanceTests>
+            </properties>
+        </profile>
+ 
+        <!-- Profile for Functional Tests -->
+        <profile>
+            <id>functional-tests</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipPerformanceTests>true</skipPerformanceTests>
+            </properties>
+        </profile>
+ 
+        <!-- Profile for Performance Tests -->
+        <profile>
+            <id>performance-tests</id>
+            <properties>
+                <skipUnitTests>true</skipUnitTests>
+                <skipFunctionalTests>true</skipFunctionalTests>
+            </properties>
+        </profile>
+    </profiles>
 
 
 </project>
