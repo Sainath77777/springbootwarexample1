@@ -66,8 +66,8 @@ jobs:
     # Step 2: Build Docker Image
     - name: Build Docker image
       run: |
-        docker build -t <your_docker_image> .
-        docker tag <your_docker_image> <your_dockerhub_username>/<your_docker_image>:latest
+        docker build -t javaapp src/main/Dockerfile
+        docker tag javaapp sainath2127/javaapp:latest
  
     # Step 3: Log in to DockerHub
     - name: Login to DockerHub
